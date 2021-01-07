@@ -28,13 +28,8 @@ variable "ip_allocation_ranges" {
     pods     = "10.1.0.0/22",
     services = "10.1.4.0/24",
     master   = "10.1.5.0/28",
+    nodes    = "10.1.6.0/24",
   }
-}
-
-variable "ip_cidr_range" {
-  type        = string
-  description = "CIDR where the nodes will be placed."
-  default     = "10.1.6.0/24"
 }
 
 variable "master_authorized_cidr_blocks" {
