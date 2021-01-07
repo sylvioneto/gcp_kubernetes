@@ -23,7 +23,7 @@ variable "vpc" {
 
 variable "ip_allocation_ranges" {
   type        = map(any)
-  description = "CIDR map for master, pods, and services."
+  description = "CIDR map for master, nodes, pods, and services."
   default = {
     pods     = "10.1.0.0/22",
     services = "10.1.4.0/24",
