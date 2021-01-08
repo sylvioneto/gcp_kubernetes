@@ -1,3 +1,7 @@
+terraform {
+  backend "gcs" {}
+}
+
 locals {
   project_id = "spedroza-sandbox"
   region     = "us-central1"
