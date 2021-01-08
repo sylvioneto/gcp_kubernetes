@@ -4,19 +4,31 @@ alertmanager:
     enabled: true
     annotations:
       kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/rewrite-target: /
     hosts:
-    - alertmanager.sandbox.sneto.ca
+    - cluster-1.sandbox.sneto.ca
+    paths:
+    - /alertmanager
 grafana:
   ingress:
     enabled: true
     annotations:
       kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/rewrite-target: /
     hosts:
-    - grafana.sandbox.sneto.ca
+    - cluster-1.sandbox.sneto.ca
+    paths:
+    - /grafana
 prometheus:
   ingress:
     enabled: true
     annotations:
       kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/rewrite-target: /
     hosts:
-    - prometheus.sandbox.sneto.ca
+    - cluster-1.sandbox.sneto.ca
+    paths:
+    - /prometheus
