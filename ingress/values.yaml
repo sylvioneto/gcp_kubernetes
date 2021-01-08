@@ -1,3 +1,4 @@
+# Ref https://github.com/kubernetes/ingress-nginx/tree/master/charts/ingress-nginx
 controller:
   replicaCount: 2
   affinity:
