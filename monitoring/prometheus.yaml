@@ -19,8 +19,7 @@ grafana:
       nginx.ingress.kubernetes.io/rewrite-target: /
     hosts:
     - cluster-1.sandbox.sneto.ca
-    paths:
-    - /grafana
+    path: /grafana
 prometheus:
   ingress:
     enabled: true
