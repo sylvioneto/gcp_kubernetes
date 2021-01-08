@@ -22,16 +22,14 @@ provider "google" {
 }
 
 module "core" {
-  #source = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/core?ref=v1.1"
-  source = "../../modules/core"
+  source = "git::https://github.com/sylvioneto/terraform_gcp.git//modules/core"
   region = local.region
   labels = local.resource_labels
 }
 
 module "gke_cluster" {
-  #source                   = "git::git@github.com:sylvioneto/terraform_gcp.git//modules/gke?ref=v1.1"
-  source                   = "../../modules/gke"
-  name                     = "test-1"
+  source                   = "git::https://github.com/sylvioneto/terraform_gcp.git//modules/gke"
+  name                     = "cluster-1"
   region                   = local.region
   vpc                      = module.core.vpc.self_link
   remove_default_node_pool = false
@@ -42,5 +40,4 @@ module "gke_cluster" {
     nodes    = "10.1.6.0/24",
   }
   resource_labels          = local.resource_labels
-  tags = ["allow-ext-ssh"]
 }

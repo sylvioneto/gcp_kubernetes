@@ -5,18 +5,18 @@ alertmanager:
     annotations:
       kubernetes.io/ingress.class: nginx
     hosts:
-    - alertmanager.mydomain.io
+    - alertmanager.sandbox.sneto.ca
 grafana:
   ingress:
     enabled: true
     annotations:
       kubernetes.io/ingress.class: nginx
     hosts:
-    - grafana.mydomain.io
+    - grafana.sandbox.sneto.ca
 prometheus:
   ingress:
     enabled: true
     annotations:
       kubernetes.io/ingress.class: nginx
     hosts:
-    - prometheus.mydomain.io
+    - prometheus.sandbox.sneto.ca
