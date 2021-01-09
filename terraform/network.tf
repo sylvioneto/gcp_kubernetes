@@ -47,9 +47,8 @@ resource "google_compute_subnetwork" "gke_subnet" {
   }
 }
 
-resource "google_compute_global_address" "ingress_nginx" {
+resource "google_compute_global_address" "google_compute_global_address" {
   name         = "ingress-nginx-${var.cluster_name}"
   description  = "NGINX Load balancer IP for ${var.cluster_name}"
-  labels       = local.resource_labels
   address_type = "EXTERNAL"
 }
