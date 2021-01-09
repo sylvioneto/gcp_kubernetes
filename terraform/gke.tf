@@ -1,14 +1,81 @@
-module "gke_cluster" {
-  source                   = "git::https://github.com/sylvioneto/terraform_gcp.git//modules/gke"
-  name                     = "cluster-1"
-  region                   = local.region
-  vpc                      = module.core.vpc.self_link
-  remove_default_node_pool = false
-  ip_allocation_ranges = {
-    pods     = "10.1.0.0/22",
-    services = "10.1.4.0/24",
-    master   = "10.1.5.0/28",
-    nodes    = "10.1.6.0/24",
+resource "google_container_cluster" "gke" {
+  name                      = var.cluster_name
+  location                  = var.region
+  default_max_pods_per_node = var.default_max_pods_per_node
+  remove_default_node_pool  = var.remove_default_node_pool
+  initial_node_count        = 1
+  resource_labels           = local.resource_labels
+
+  master_auth {
+    client_certificate_config {
+      issue_client_certificate = false
+    }
   }
-  resource_labels          = local.resource_labels
+
+  release_channel {
+    channel = var.release_channel
+  }
+
+  // Network settings
+  network    = var.vpc
+  subnetwork = google_compute_subnetwork.gke_subnet.self_link
+  private_cluster_config {
+    enable_private_nodes    = true
+    enable_private_endpoint = false
+    master_ipv4_cidr_block  = var.ip_allocation_ranges["master"]
+  }
+  ip_allocation_policy {
+    cluster_secondary_range_name  = "pods"
+    services_secondary_range_name = "services"
+  }
+  master_authorized_networks_config {
+    dynamic "cidr_blocks" {
+      for_each = var.master_authorized_cidr_blocks
+      content {
+        cidr_block   = cidr_blocks.value["cidr_block"]
+        display_name = cidr_blocks.value["display_name"]
+      }
+    }
+  }
+
+  workload_identity_config {
+    identity_namespace = "${data.google_project.project.project_id}.svc.id.goog"
+  }
+
+  // Nodes config
+  node_config {
+    service_account = google_service_account.service_account.email
+    preemptible     = var.preemptible
+    machine_type    = var.machine_type
+
+    metadata = {
+      disable-legacy-endpoints = "true"
+    }
+
+    workload_metadata_config {
+      node_metadata = "GKE_METADATA_SERVER"
+    }
+
+    oauth_scopes = [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ]
+    tags = var.tags
+  }
+
+  timeouts {
+    create = "30m"
+    update = "40m"
+  }
+}
+
+resource "google_service_account" "service_account" {
+  account_id   = "gke-${var.region}-${var.cluster_name}"
+  display_name = "GKE Cluster ${var.cluster_name}"
+}
+
+resource "google_project_iam_member" "role" {
+  count      = length(var.iam_roles)
+  role       = var.iam_roles[count.index]
+  member     = "serviceAccount:${google_service_account.service_account.email}"
+  depends_on = [google_service_account.service_account]
 }
