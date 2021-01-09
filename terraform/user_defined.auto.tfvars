@@ -1,4 +1,5 @@
 
+project_id               = "spedroza-tests-gke"
 region                   = "us-central1"
 vpc                      = "tests-gke-vpc"
 cluster_name             = "cluster-1"

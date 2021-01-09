@@ -8,8 +8,8 @@ This project deploys a GKE cluster with Ingress Controller and Prometheus.
 
 ## Deploy
 
-1. Create a bucket to store the terraform state file, e.g spedroza-tf-state
-2. Update the `terraform/main.tf` values according to your project.
+1. Update the `terraform/main.tf` backend values to save the state in your GCS project.
+2. Update the `user_defined.auto.tfvars` with the desired settings.
 3. Run terraform to create the project core infrastructure & the GKE cluster.
 ```
 cd terraform
