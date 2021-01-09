@@ -22,20 +22,20 @@ terraform apply "gke.tfplan"
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 kubectl create namespace nginx
-helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx -n nginx -f helm/ingress-nginx.yaml
+helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --version 3.19.0 -n nginx -f helm/ingress-nginx.yaml
 ```
 5. Install External Dns
 ```
 helm repo add bitnami https://charts.bitnami.com/bitnami
 kubectl create namespace external-dns
-helm upgrade --install external-dns bitnami/external-dns -n external-dns -f helm/external-dns.yaml
+helm upgrade --install external-dns bitnami/external-dns --version 4.5.0 -n external-dns -f helm/external-dns.yaml
 ```
 6. Install for Prometheus Stack
 ```
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
 kubectl create namespace monitoring
-helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack -n monitoring -f helm/prometheus.yaml
+helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack --version 12.10.6 -n monitoring -f helm/prometheus.yaml
 ```
 
 ## Uninstall
