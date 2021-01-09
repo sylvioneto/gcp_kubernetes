@@ -1,0 +1,12 @@
+# Ref https://github.com/bitnami/charts/tree/master/bitnami/external-dns
+domainFilters:
+- sandbox.sneto.ca
+provider: google
+sources:
+- ingress
+google:
+  project: spedroza-sandbox
+serviceAccount:
+  create: true
+  annotations:
+    iam.gke.io/gcp-service-account: external-dns@spedroza-sandbox.iam.gserviceaccount.com

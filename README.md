@@ -9,10 +9,10 @@ This project deploys a GKE cluster with Ingress Controller and Prometheus.
 ## Deploy
 
 1. Create a bucket to store the terraform state file, e.g spedroza-tf-state
-2. Update the `gke/main.tf` values according to your project.
+2. Update the `terraform/main.tf` values according to your project.
 3. Run terraform to create the project core infrastructure & the GKE cluster.
 ```
-cd gke
+cd terraform
 terraform init
 terraform plan -out gke.tfplan
 terraform apply "gke.tfplan"
@@ -22,14 +22,20 @@ terraform apply "gke.tfplan"
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 kubectl create namespace nginx
-helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx -n nginx -f ingress/values.yaml
+helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx -n nginx -f helm/ingress-nginx.yaml
 ```
-5. Install for Prometheus Stack
+5. Install External Dns
+```
+helm repo add bitnami https://charts.bitnami.com/bitnami
+kubectl create namespace external-dns
+helm upgrade --install external-dns bitnami/external-dns -n external-dns -f helm/external-dns.yaml
+```
+6. Install for Prometheus Stack
 ```
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
 kubectl create namespace monitoring
-helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack -n monitoring -f monitoring/prometheus.yaml
+helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack -n monitoring -f helm/prometheus.yaml
 ```
 
 ## Uninstall
