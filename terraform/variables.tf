@@ -62,6 +62,12 @@ variable "machine_type" {
   default     = "g1-small"
 }
 
+variable "initial_node_count" {
+  type = number
+  description = "Initial node pool size"
+  default = 1
+}
+
 variable "preemptible" {
   type        = bool
   description = "Preemptible VMs"

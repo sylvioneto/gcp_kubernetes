@@ -3,7 +3,7 @@ resource "google_container_cluster" "gke" {
   location                  = var.region
   default_max_pods_per_node = var.default_max_pods_per_node
   remove_default_node_pool  = var.remove_default_node_pool
-  initial_node_count        = 1
+  initial_node_count        = var.initial_node_count
   resource_labels           = local.resource_labels
 
   master_auth {
