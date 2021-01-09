@@ -1,6 +1,10 @@
 resource "google_service_account" "external_dns" {
   account_id   = "external-dns"
   display_name = "External DNS"
+
+  depends_on = [
+     google_container_cluster.gke
+  ]
 }
 
 resource "google_project_iam_member" "dns_admin" {
