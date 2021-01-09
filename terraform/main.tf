@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "spedroza-tests-gke-tf"
+    bucket = "spedroza-terraform"
     prefix = "tests-gke/cluster-1"
   }
 }
