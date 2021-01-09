@@ -1,10 +1,9 @@
 # gcp_kubernetes
-This project deploys a GKE cluster with Ingress Controller and Prometheus.
+This project deploys a GKE cluster with Ingress controller, DNS, and Prometheus.
 
 ## Pre-req
 - terraform >=0.14
 - helm >=3.4.0
-- VPC and [Cloud NAT](https://cloud.google.com/nat/docs/overview) because it is a private cluster
 
 ## Deploy
 
