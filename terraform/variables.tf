@@ -63,9 +63,9 @@ variable "machine_type" {
 }
 
 variable "initial_node_count" {
-  type = number
+  type        = number
   description = "Initial node pool size"
-  default = 1
+  default     = 1
 }
 
 variable "preemptible" {

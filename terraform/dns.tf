@@ -7,10 +7,11 @@ resource "google_compute_address" "ingress_external_ip" {
 resource "google_dns_managed_zone" "public" {
   name = "public"
 
-  dns_name    = "${var.dns_name}."
-  description = "Public zone"
-  visibility  = "public"
-  labels      = var.resource_labels
+  dns_name      = "${var.dns_name}."
+  description   = "Public zone"
+  visibility    = "public"
+  force_destroy = true
+  labels        = var.resource_labels
 }
 
 resource "google_dns_record_set" "root" {
