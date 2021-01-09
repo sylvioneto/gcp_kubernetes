@@ -1,4 +1,4 @@
-resource "google_compute_global_address" "ingress_external_ip" {
+resource "google_compute_address" "ingress_external_ip" {
   name         = "ingress-nginx-${var.cluster_name}"
   description  = "NGINX Load balancer IP for ${var.cluster_name}"
   address_type = "EXTERNAL"
@@ -19,5 +19,5 @@ resource "google_dns_record_set" "root" {
   ttl  = 300
 
   managed_zone = google_dns_managed_zone.public.name
-  rrdatas      = [google_compute_global_address.ingress_external_ip.address]
+  rrdatas      = [google_compute_address.ingress_external_ip.address]
 }
