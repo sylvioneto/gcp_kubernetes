@@ -1,6 +1,6 @@
 # Create VPC
 resource "google_compute_network" "vpc" {
-  name                    = "${data.google_project.project.project_id}-vpc"
+  name                    = var.vpc
   description             = "VPC managed by terraform"
   auto_create_subnetworks = false
 }
@@ -33,7 +33,7 @@ resource "google_compute_subnetwork" "gke_subnet" {
   name                     = var.cluster_name
   ip_cidr_range            = var.ip_allocation_ranges["nodes"]
   region                   = var.region
-  network                  = var.vpc
+  network                  = google_compute_network.vpc.name
   private_ip_google_access = true
 
   secondary_ip_range {
