@@ -1,6 +1,7 @@
 
 project_id               = "spedroza-tests-gke"
 region                   = "us-central1"
+dns_name                 = "sandbox.sneto.ca"
 vpc                      = "tests-gke-vpc"
 cluster_name             = "cluster-1"
 remove_default_node_pool = false

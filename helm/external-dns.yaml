@@ -5,8 +5,8 @@ provider: google
 sources:
 - ingress
 google:
-  project: spedroza-sandbox
+  project: spedroza-tests-gke
 serviceAccount:
   create: true
   annotations:
-    iam.gke.io/gcp-service-account: external-dns@spedroza-sandbox.iam.gserviceaccount.com
+    iam.gke.io/gcp-service-account: external-dns@spedroza-tests-gke.iam.gserviceaccount.com

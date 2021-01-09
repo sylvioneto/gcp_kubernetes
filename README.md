@@ -17,20 +17,23 @@ terraform init
 terraform plan -out gke.tfplan
 terraform apply "gke.tfplan"
 ```
-4. Connect to your cluster and install Ingress Nginx
+4. Update the `helm/ingress-nginx.yaml` with the new external ip created.
+5. Connect to your cluster and install Ingress Nginx
 ```
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 kubectl create namespace nginx
 helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --version 3.19.0 -n nginx -f helm/ingress-nginx.yaml
 ```
-5. Install External Dns
+6. Update the project and domain on  `helm/external-dns.yaml`.
+7. Install External Dns
 ```
 helm repo add bitnami https://charts.bitnami.com/bitnami
 kubectl create namespace external-dns
 helm upgrade --install external-dns bitnami/external-dns --version 4.5.0 -n external-dns -f helm/external-dns.yaml
 ```
-6. Install for Prometheus Stack
+8. Update the domains on `helm/prometheus.yaml`.
+9. Install for Prometheus Stack
 ```
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update

@@ -46,9 +46,3 @@ resource "google_compute_subnetwork" "gke_subnet" {
     ip_cidr_range = var.ip_allocation_ranges["services"]
   }
 }
-
-resource "google_compute_global_address" "google_compute_global_address" {
-  name         = "ingress-nginx-${var.cluster_name}"
-  description  = "NGINX Load balancer IP for ${var.cluster_name}"
-  address_type = "EXTERNAL"
-}
