@@ -42,5 +42,5 @@ Run the commands below.
 $ helm del kube-prometheus-stack -n monitoring
 $ helm del ingress-nginx -n nginx
 $ helm del external-dns -n external-dns
-$ cd gke; terraform init; terraform destroy
+$ cd terraform; terraform init; terraform destroy
 ```
